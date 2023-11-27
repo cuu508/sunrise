@@ -74,11 +74,11 @@ class sunrise
     boolean   writeCalibrationTarget(uint16_t calibrationTarget);
     int16_t   readABCTime(void);
     boolean   writeABCTime(uint16_t ABCTime);
-	void	  incrementABCTime(void);
+    void      incrementABCTime(void);
     boolean   startSingleMeasurement(void);
     boolean   setMeasurementMode(uint8_t measurementMode);
     boolean   setMeasurementPeriod(uint16_t measurementPeriod);
-    boolean   setNbrSamples(uint16_t nbrS);    
+    boolean   setNbrSamples(uint16_t nbrS);
     boolean   setABCPeriod(uint16_t ABCPeriod);
     boolean   clearErrorStatus(void);
     boolean   setABCTarget(uint16_t abcTarget);
@@ -89,5 +89,5 @@ class sunrise
     boolean   setI2cAddress(uint8_t i2caddress);
     boolean   readPowerDownData(void);
     boolean   writePowerDownData(void);
-	uint16_t  getSingleReading(uint8_t co2_type, const uint8_t readyPin);
+    uint16_t  getSingleReading(uint8_t co2_type, const uint8_t readyPin);
 };

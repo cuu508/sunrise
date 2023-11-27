@@ -149,52 +149,51 @@ uint16_t sunrise::getSingleReading(uint8_t co2_type, uint8_t readyPin) {
 
   boolean powerDownDataIsPopulated = false;
   for (int i=0 ; i<24 ; i++) {
-	if(powerDownData[i] > 0){
-		powerDownDataIsPopulated = true;
-		break;
-		;
-	}
+  if(powerDownData[i] > 0){
+    powerDownDataIsPopulated = true;
+    break;
+  }
   }
 
 if (!powerDownDataIsPopulated) {
   if (!readPowerDownData()) {
     Serial.println("Failed to read power down data from the sensor!");
   } else {
-	Serial.println("Power down data was NOT populated, data read from sensor for next measurement.");
+    Serial.println("Power down data was NOT populated, data read from sensor for next measurement.");
   }
 } else {
   if (!writePowerDownData()) {
     Serial.println("Failed to write power down data to the sensor!");
     return 0;
   } else {
-	Serial.println("Power down data was populated, data was written to sensor.");
+    Serial.println("Power down data was populated, data was written to sensor.");
   }
 }
- 
- 
+
+
 
  if(!startSingleMeasurement()){
-	Serial.println("Failed to start single measurement!");
- 	 return 0;
+  Serial.println("Failed to start single measurement!");
+   return 0;
  }
 
   uint8_t cnt = 0;
   uint8_t maxWaitLoops = 300;
   while(digitalRead(readyPin) && cnt < maxWaitLoops) {
-	Serial.println("Waiting for measurement...");
-	cnt++;
-	delay(200);
+  Serial.println("Waiting for measurement...");
+  cnt++;
+  delay(200);
   }
   if(cnt == maxWaitLoops){
-	Serial.println("Measurement timeout, exiting...");
-	return 0;
+  Serial.println("Measurement timeout, exiting...");
+  return 0;
   }
-  
+
   error = readErrorStatus();
-  if(error != 0 ) {  
+  if(error != 0 ) {
     Serial.println("An error occured...");
   } else {
-	co2 = readCO2(co2_type);
+    co2 = readCO2(co2_type);
   }
 
  ok = readPowerDownData();
@@ -204,7 +203,7 @@ if (!powerDownDataIsPopulated) {
 }
 
 void sunrise::incrementABCTime(){
-	uint16_t abc_time = ((int16_t)(int8_t) powerDownData[0] << 8) | (uint16_t)powerDownData[1];
+  uint16_t abc_time = ((int16_t)(int8_t) powerDownData[0] << 8) | (uint16_t)powerDownData[1];
     abc_time = abc_time + 1;
     powerDownData[0] = abc_time >> 8;
     powerDownData[1] = abc_time & 0x00FF;
