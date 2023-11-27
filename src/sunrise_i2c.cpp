@@ -4,12 +4,12 @@
 #include "sunrise_i2c.h"
 
 
-const uint8_t					DATA_PIN                 = 21;    // Data pin
-const uint8_t					CLOCK_PIN                = 22;    // Clock pin
-const int						ATTEMPTS                 = 5;     // Wake up attempts
-const uint8_t					SUNRISE_ADDRESS          = 0x68;  // Sunrise i2c address
-const int						EEPROM_WRITE_DELAY       = 25;    // Write delay for EEPROM
-RTC_DATA_ATTR uint8_t			powerDownData[]			 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};         // Array for sensor state
+const uint8_t         DATA_PIN                 = 8;    // Data pin
+const uint8_t         CLOCK_PIN                = 9;    // Clock pin
+const int             ATTEMPTS                 = 5;     // Wake up attempts
+const uint8_t         SUNRISE_ADDRESS          = 0x68;  // Sunrise i2c address
+const int             EEPROM_WRITE_DELAY       = 25;    // Write delay for EEPROM
+uint8_t               powerDownData[]      = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};         // Array for sensor state
 
 
 sunrise::sunrise() {};
