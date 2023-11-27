@@ -158,13 +158,13 @@ uint16_t sunrise::getSingleReading(uint8_t co2_type, uint8_t readyPin) {
 
 if (!powerDownDataIsPopulated) {
   if (!readPowerDownData()) {
-    Serial.println("Failed to save power down data!");
+    Serial.println("Failed to read power down data from the sensor!");
   } else {
 	Serial.println("Power down data was NOT populated, data read from sensor for next measurement.");
   }
 } else {
   if (!writePowerDownData()) {
-    Serial.println("Failed to save power down data!");
+    Serial.println("Failed to write power down data to the sensor!");
     return 0;
   } else {
 	Serial.println("Power down data was populated, data was written to sensor.");
