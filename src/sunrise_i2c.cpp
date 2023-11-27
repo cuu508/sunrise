@@ -123,20 +123,21 @@ boolean write16bit(uint8_t offsetReg, int8_t hiByte, int8_t loByte) {     // DON
 
 
 void sunrise::initSunrise() {     // DONE!
-  Wire.begin(DATA_PIN, CLOCK_PIN);
-  Wire.setClock(100000);
-  Wire.beginTransmission(SUNRISE_ADDRESS);
-  while (Wire.endTransmission () != 2)  // Receive 2 = success (Address NACK response)
-  {
-    Serial.print("Waiting for sunrise response from address 0x");
-    Serial.println(SUNRISE_ADDRESS, HEX);
-    delay(1000);
+  Serial.print("Initializing sensor");
+  int error = 0;
+  do {
+    if (error != 0) {
+      Serial.print("Initialization error ");
+      Serial.println(error);
+      delay(1000);
+    }
     Wire.begin(DATA_PIN, CLOCK_PIN);
     Wire.setClock(100000);
     Wire.beginTransmission(SUNRISE_ADDRESS);
-  }
+    error = Wire.endTransmission(true);
+  } while((error != 0) && (error != 2));
+
   Serial.println("I2C ready!");
-  delay(100);
 }
 
 
